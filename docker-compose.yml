@@ -1,0 +1,7 @@
+version: '2'
+services:
+  alpine-base:
+    build: .
+    image: jameseckersall/docker-alpine-base
+    environment:
+      DEBUG: "no"
