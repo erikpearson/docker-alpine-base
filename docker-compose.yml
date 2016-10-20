@@ -2,4 +2,4 @@ version: '2'
 services:
   alpine-base:
     build: .
-    image: jameseck/alpine-base
+    image: jameseckersall/alpine-base
