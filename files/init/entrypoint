@@ -37,32 +37,16 @@ entrypoint_pre=$(ls /hooks/entrypoint-pre.d/* 2>/dev/null | sort -n )
 if [ "$entrypoint_pre" != "" ]; then
   for hook in $entrypoint_pre; do
     echo "Executing hook ${hook}"
-    /bin/bash -c "${hook}"
+    /bin/bash $hook
     if [ "$?" != "0" ]; then
       die "hook ${hook}} returned a non-zero exit status '$?'"
     fi
   done
 fi
 
-[[ -f "/hooks/entrypoint-pre" ]] && echo "The /hooks/entrypoint-pre hook has been replaced with /hooks/entrypoint-pre.d/*" && exit 1
-
 [[ -f "/init/setup" ]] && /init/setup
 
 eval ${SETUP:-}
-
-# If the Dockerfile "USER" is sat, we cant do this trick
-#if [[ ${UID} == 0 ]]; then
-#  DUID=${DUID:-950}
-#  DGID=${DGID:-950}
-#  [[ $(id -u docker) == ${DUID} ]] || usermod -o -u ${DUID} docker
-#  [[ $(id -g docker) == ${DGID} ]] || groupmod -o -g ${DGID} docker
-#else
-#  if [[ ${DUID} || ${DGID} ]]; then
-#    echo "WARNING: You have sat DUID or DGID, but we are not able to change the userid because we are not UID 0 (root)."
-#    echo "DUID=${DUID}, DGID=${DGID}, we are $(id)"
-#   echo
-#  fi
-#fi
 
 case ${1} in
   run)
