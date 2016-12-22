@@ -3,3 +3,4 @@ services:
   alpine-base:
     build: .
     image: jameseckersall/alpine-base
+    user: "100000:100000"
