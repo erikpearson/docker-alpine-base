@@ -4,7 +4,8 @@ MAINTAINER James Eckersall <james.eckersall@gmail.com>
 
 RUN \
   apk update && \
-  apk add bash curl rsync supervisor
+  apk add bash curl rsync supervisor && \
+  chmod -R 0777 /var/log
 
 COPY files /
 
