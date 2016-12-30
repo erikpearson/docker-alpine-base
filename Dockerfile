@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.4
 
 MAINTAINER James Eckersall <james.eckersall@gmail.com>
 
